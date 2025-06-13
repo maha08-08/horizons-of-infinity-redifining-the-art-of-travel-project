@@ -63,10 +63,10 @@
             text-decoration: underline;
         }
 
-        
+
         .menu-toggle {
             display: none;
-            
+
             font-size: 5px;
             cursor: pointer;
             color: #f0f0f0;
@@ -456,41 +456,76 @@
                 flex-direction: column;
                 align-items: flex-start;
                 background-color: rgba(0, 0, 0, 0.9);
+                position: relative;
             }
 
             header img {
-                width: 5%;
+                width: 30px;
             }
 
             header .brand {
-                font-size: 0.6rem;
+                font-size: 1rem;
+                margin-right: 0;
+                /* remove the huge gap */
+                text-align: center;
             }
+
             .menu-toggle {
-                display: grid;
+                display: block;
+                position: absolute;
+                top: 10px;
+                right: 20px;
+                z-index: 1000;
+                cursor: pointer;
+            }
+
+            header .navigation-items a {
+                /* font-size: 0.9rem; */
+                padding: 10px 0;
+                font-size: 1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                background-color: rgba(0, 0, 0, 0);
+                text-align: left;
             }
 
             .menu-toggle .bar {
-                width: 35px;
-                height: 4px;
-                background-color: #b9b5b5;
-                padding: 0px;
+                width: 25px;
+                height: 3px;
+                background-color: #fff;
+                margin: 4px 0;
             }
 
             header .navigation-items {
                 display: none;
                 flex-direction: column;
                 width: 100%;
+                background-color: rgba(0, 0, 0, 0);
+                padding: 10px 20px;
+                gap: 10px;
+            }
+
+            .navigation-items a,
+            .navigation-items .select {
+                width: 100%;
+                text-align: left;
+            }
+
+            .custom-select-wrapper {
+                display: flex;
+                flex-direction: column;
+                background-color: rgba(0, 0, 0, 0);
+                gap: 10px;
             }
 
             header .navigation-items.active {
                 display: flex;
             }
 
-.heading{
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-        }
+            .heading {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
 
             .home .content h1 {
                 font-size: 1.8em;
@@ -542,14 +577,14 @@
     <header>
         <div class="heading">
             <div style="display: flex; gap: 5px;">
-        <img src="./image.png.png" alt="" style="width: 30px; height: 30px;">
-        <a href="" class="brand">Wander World</a>
-        </div>
-        <div class="menu-toggle" id="menuToggle">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
+                <img src="./image.png.png" alt="" style="width: 30px; height: 30px;">
+                <a href="" class="brand">Wander World</a>
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
         </div>
         <div class="navigation">
             <div class="navigation-items" id="navItems">
@@ -567,6 +602,7 @@
                     </select>
                     <select class="select">
                         <option value="Destination">Destination</option>
+                        
                         <option value="Africa">Africa</option>
                         <option value="Asia">Asia</option>
                         <option value="Europe">Europe</option>
@@ -595,7 +631,8 @@
                     </select>
                 </div>
                 <a target="_blank" href="./booknow.html" class="btn btn-primary btn-lg active" role="button"
-                    aria-pressed="true">Book
+                    aria-pressed="true"
+                    style="display: flex; justify-content: center; align-items: center; text-align: center;">Book
                     Now</a>
             </div>
         </div>
@@ -616,7 +653,7 @@
                     style="width: 50%" ; />
             </div>
             <div style="flex: 1; padding-right: 20px;" class="text-content">
-                <h5 style="color: grey;">Discover the Wonders of the World with WanderWorld</h5 >
+                <h5 style="color: grey;">Discover the Wonders of the World with WanderWorld</h5>
                 <h5 style="color: black;">The Ultimate Personalized Global Travel Experience</h5>
                 <p style="text-align: justify; line-height: 1.6; color: grey;">
                     We’ve charted a world of unforgettable adventures — from the snow-capped peaks of the Alps to
@@ -818,6 +855,7 @@
         menuToggle.addEventListener('click', () => {
             navItems.classList.toggle('active');
         });
+
     </script>
 </body>
 
