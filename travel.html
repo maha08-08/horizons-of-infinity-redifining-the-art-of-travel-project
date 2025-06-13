@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wander World</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        header {
+            z-index: 999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: 0.5s ease;
+        }
+
+        header img {
+            display: block;
+            width: 50px;
+        }
+
+        header .brand {
+            color: #fff;
+            margin-right: 300px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        header .navigation-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        header .navigation-items a {
+            color: #fff;
+            font-size: 1em;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        header .navigation-items a:hover {
+            text-decoration: underline;
+        }
+
+        
+        .menu-toggle {
+            display: none;
+            
+            font-size: 5px;
+            cursor: pointer;
+            color: #f0f0f0;
+        }
+
+        section {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .select {
+            background-color: transparent;
+            position: relative;
+            color: white;
+            border: none;
+            padding: 4px 0px;
+            cursor: pointer;
+            font-size: 16px;
+            appearance: none;
+        }
+
+        .select:hover {
+            border-bottom: 2px solid white;
+        }
+
+        .select option {
+            background-color: rgb(198, 220, 240);
+            color: rgb(4, 63, 119);
+        }
+
+        .home {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            background: #626f79;
+        }
+
+        .home .content {
+            z-index: 888;
+            color: #fff;
+            position: absolute;
+            text-align: center;
+            bottom: 3%;
+            left: 15%;
+            padding: 20px;
+            width: 70%;
+            margin-top: 50px;
+        }
+
+        .home .content h1 {
+            font-size: 3em;
+            font-weight: 900;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            line-height: 75px;
+            margin-top: 50px;
+            margin-bottom: 0.5rem;
+        }
+
+        .home .content p {
+            margin-bottom: 1.5rem;
+            font-family: sans-serif;
+            font-size: 1.5rem;
+        }
+
+        .home .content a {
+            background: inherit;
+            padding: 12px 25px;
+            color: #03241d;
+            font-size: 1.1em;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 2px;
+        }
+
+        .home video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .badge {
+            width: 150px;
+            height: 150px;
+            margin: 20px;
+        }
+
+        .content-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .icon {
+            font-size: 50px;
+            color: #555;
+        }
+
+        .hero-text {
+            margin: 20px 0;
+        }
+
+        .row a {
+            color: rgb(5, 128, 158);
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .content-wrapper {
+            gap: 30px;
+        }
+
+        .header-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .text-section {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .image-section img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+        }
+
+        .content-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .content-section {
+            flex: 1 1 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            background-color: whitesmoke;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2,
+        h4 {
+            margin: 10px 0;
+        }
+
+        .card-container {
+            border-radius: 20px;
+            background-image: url("https://png.pngtree.com/thumb_back/fh260/back_our/20190619/ourmid/pngtree-travel-around-the-world-travel-poster-template-image_140335.jpg");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            padding: 10px 0px;
+        }
+
+        .card-content {
+            margin: 0px;
+            padding: 7px;
+        }
+
+        .card-content h4 {
+            font-family: cursive;
+            font-size: 2rem;
+        }
+
+        .card-parent {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5);
+            background-image: url("https://static.vecteezy.com/system/resources/thumbnails/011/980/961/small/travel-concept-illustration-in-paper-cut-style-design-vacation-background-vector.jpg");
+            background-size: cover;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            height: 70%;
+        }
+
+        .card img {
+            width: 370px;
+            min-height: 300px;
+        }
+
+        .trav-matter {
+            background-image: url("https://img.freepik.com/free-photo/pouch-map-toy-airplane-blue-background-with-space-writing-text_23-2147958180.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 20px;
+            font-family: sans-serif;
+            margin: 10px;
+            padding: 20px;
+        }
+
+        .trav-matter h4,
+        h3 {
+            font-family: cursive;
+        }
+
+        .trav-matter h4 {
+            text-decoration: underline;
+        }
+
+        .trav-matter p {
+            font-size: 1.2rem;
+            color: #360126;
+        }
+
+        .cards {
+            display: flex;
+        }
+
+        .trav-cards {
+            flex: 1 1 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            background-image: url("https://png.pngtree.com/background/20210717/original/pngtree-car-travel-card-minimalist-background-picture-image_1433946.jpg");
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .trav-cards h4 {
+            text-decoration: underline;
+        }
+
+        .trav-cards p {
+            color: #360126;
+        }
+
+        .mt-0 {
+            background-image: url("https://thumbs.dreamstime.com/b/shadow-mountain-layer-sun-ray-silhouette-shot-60706034.jpg");
+            background-size: cover;
+            backdrop-filter: blur(20px);
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 350px;
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: middle;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .flip-card-back {
+            padding: 20px;
+        }
+
+        .flip-card-front {
+            background-color: #ffffff;
+            color: black;
+        }
+
+        .flip-card-front img {
+            max-width: 100%;
+            height: 100%;
+        }
+
+        .flip-card-back {
+            background-color: #007bff;
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-back .btn {
+            margin-top: 15px;
+        }
+
+        .container h1,
+        .container h2 {
+            color: #0056b3;
+        }
+
+        .navbar {
+            margin-bottom: 30px;
+        }
+
+        .footer {
+            background-color: #111;
+            color: #ccc;
+            padding: 60px 0 20px;
+            font-size: 14px;
+        }
+
+        .footer h5 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer ul li {
+            padding: 6px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .footer ul li a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .footer ul li a:hover {
+            color: #fff;
+        }
+
+        .payment-icons img {
+            height: 25px;
+            margin-right: 8px;
+        }
+
+        .dpo-logo {
+            margin-top: 10px;
+            max-width: 150px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            margin-top: 40px;
+            padding-top: 20px;
+            font-size: 13px;
+        }
+
+        .footer-bottom a {
+            color: #ccc;
+            margin-left: 15px;
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            color: #fff;
+        }
+
+
+
+
+        @media (max-width: 992px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                background-color: rgba(0, 0, 0, 0.9);
+            }
+
+            header img {
+                width: 5%;
+            }
+
+            header .brand {
+                font-size: 0.6rem;
+            }
+            .menu-toggle {
+                display: grid;
+            }
+
+            .menu-toggle .bar {
+                width: 35px;
+                height: 4px;
+                background-color: #b9b5b5;
+                padding: 0px;
+            }
+
+            header .navigation-items {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            header .navigation-items.active {
+                display: flex;
+            }
+
+.heading{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+            .home .content h1 {
+                font-size: 1.8em;
+            }
+
+            .home .content p {
+                font-size: 1rem;
+            }
+
+            .image-content img {
+                width: 100%;
+            }
+
+            .content-wrapper {
+                flex-direction: column;
+            }
+
+            .text-content {
+                padding-right: 0;
+            }
+
+            .card-container {
+                background-image: none;
+                background-color: rgb(200, 200, 240);
+            }
+
+            .card-parent {
+                flex-direction: column;
+            }
+
+            .card {
+                width: 100%;
+                background-color: inherit;
+                background-size: cover;
+            }
+
+            .trav-matter {
+                flex-direction: column;
+            }
+
+            .cards {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="heading">
+            <div style="display: flex; gap: 5px;">
+        <img src="./image.png.png" alt="" style="width: 30px; height: 30px;">
+        <a href="" class="brand">Wander World</a>
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        </div>
+        <div class="navigation">
+            <div class="navigation-items" id="navItems">
+                <a href="">Home</a>
+                <a target="_blank" href="./gallery.html">Gallery</a>
+                <div class="custom-select-wrapper">
+                    <select class="select">
+                        <option value="Guided Tours">Guided Tours</option>
+                        <option value="Adventure Tours">Adventure Tours</option>
+                        <option value="Nature Tours">Nature Tours</option>
+                        <option value="Culture Tours">Culture Tours</option>
+                        <option value="History Tours">History Tours</option>
+                        <option value="Wildlife Tours">Wildlife Tours</option>
+                        <option value="Safari Tours">Safari Tours</option>
+                    </select>
+                    <select class="select">
+                        <option value="Destination">Destination</option>
+                        <option value="Africa">Africa</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europe">Europe</option>
+                        <option value="North America">North America</option>
+                        <option value="South America">South America</option>
+                        <option value="Oceania">Oceania</option>
+                        <option value="Iceland">Iceland</option>
+                        <option value="Turkey">Turkey</option>
+                        <option value="Jordan">Jordan</option>
+                        <option value="Antarctica">Antarctica</option>
+                        <option value="The Maldives">The Maldives</option>
+                    </select>
+                    <select class="select">
+                        <option value="About Us">About Us</option>
+                        <option value="Contact Us">Contact Us</option>
+                        <option value="Our Heart Is In World">Our Heart Is In World</option>
+                        <option value="Request A Quote">Request A Quote</option>
+                    </select>
+                    <select class="select">
+                        <option value="Languages">Languages</option>
+                        <option value="English">English</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="French">French</option>
+                        <option value="Portuguese">Portuguese</option>
+                        <option value="Arabic">Arabic</option>
+                    </select>
+                </div>
+                <a target="_blank" href="./booknow.html" class="btn btn-primary btn-lg active" role="button"
+                    aria-pressed="true">Book
+                    Now</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="home">
+        <video class="video-slide" src="./background.mp4.mp4" autoplay muted loop></video>
+        <div class="content">
+            <h1>Discover The Magic Of World</h1>
+            <p>Where Luxury And Adventure Meet To Make Your Dreams Come True</p>
+            <a href="">Read More</a>
+        </div>
+    </section>
+    <div class="container text-center">
+        <div style="display: flex; align-items: center;" class="content-wrapper">
+            <div style="flex: 1;">
+                <img src="https://tomaandcoe.com/wp-content/uploads/TC_green_winner-gif_LL_2024.webp" alt="Travel Image"
+                    style="width: 50%" ; />
+            </div>
+            <div style="flex: 1; padding-right: 20px;" class="text-content">
+                <h5 style="color: grey;">Discover the Wonders of the World with WanderWorld</h5 >
+                <h5 style="color: black;">The Ultimate Personalized Global Travel Experience</h5>
+                <p style="text-align: justify; line-height: 1.6; color: grey;">
+                    We’ve charted a world of unforgettable adventures — from the snow-capped peaks of the Alps to
+                    the ancient temples of Southeast Asia. At WanderWorld, your journey is more than a destination;
+                    it’s a curated story filled with iconic landmarks, hidden gems, and cultural encounters. You can
+                    marvel at the Northern Lights in Norway, sail through the Greek Isles, explore the spice markets
+                    of Morocco, or relax on the sun-kissed beaches of Bali. Wherever your travel dreams lead, we’ll
+                    take you there with style, comfort, and authenticity.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4 content-section">
+                <h4> <i class="fa-solid fa-globe"></i> About World</h4>
+                <p>Why travel is more than just movement — it’s connection, discovery, and transformation<br><a
+                        href="#">Find Out</a></p>
+            </div>
+            <div class="col-md-4 content-section">
+                <h4> <i class="fa-solid fa-signs-post"></i> Where to Go</h4>
+                <p>Explore breathtaking destinations — from vibrant cities to remote wonders across every
+                    continent.<br><a href="#">Find Out</a></p>
+            </div>
+            <div class="col-md-4 content-section">
+                <h4> <i class="fa-solid fa-snowflake"></i> When to Go</h4>
+                <p>Discover the best times to visit each part of the world — whether you're chasing summer sun or snowy
+                    magic.<br><a href="#">Find Out</a></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 content-section">
+                <h4> <i class="fa-solid fa-bed"></i> Where to Stay</h4>
+                <p>Find handpicked stays — boutique hotels, eco-lodges, and luxury resorts tailored to your dream
+                    experience.<br><a href="#">Find Out</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="card-content">
+            <h4>Get inspired for your next trip</h4>
+            <h4>Discover Special Deals!</h4>
+        </div>
+        <div class="card-parent">
+            <div class="card">
+                <img src="https://www.pandotrip.com/wp-content/uploads/2013/08/1D110-Bertrand-Monney.jpg" alt="paris">
+                <h3>5 Days of the Best Paris Experience</h3>
+                <p class="card-description">
+                    1 Week
+                </p>
+                <p class="card-price">Price: $5000</p>
+            </div>
+            <div class="card">
+                <img src="https://media.istockphoto.com/id/1164329797/photo/hindu-sadhu-sitting-on-a-boat-overlooking-varanasi-city-architecture-at-sunset.jpg?s=612x612&w=0&k=20&c=LbpIHRo7kGT7dbUr6b6UuD1d6P0yCaKZ2lbqo3TY988="
+                    alt="india">
+                <h3>6 Days of the Best Kashi (Varanasi) Experience</h3>
+                <p class="card-description">
+                    5 Days 5 Nights
+                </p>
+                <p class="card-price">Price: $5000</p>
+            </div>
+            <div class="card">
+                <img src="https://media1.popsugar-assets.com/files/thumbor/W7xBMooTKm4JRstd4jojSYBoEqY=/0x0:7952x5304/fit-in/792x528/top/filters:format_auto():upscale()/2020/03/24/559/n/45101125/06c61ac25e79fc30a64224.30513518_.jpg"
+                    alt="italy">
+                <h3>10 Days of the Best Italy Experience</h3>
+                <p class="card-description">
+                    3 Weeks
+                </p>
+                <p class="card-price">Price: $5000</p>
+            </div>
+        </div>
+    </div>
+    <div class="trav-matter">
+        <h4>Why Travel with WanderWorld?</h4>
+        <h3>Offering Unforgettable Global Experiences</h3>
+        <p>At WanderWorld, we specialize in crafting immersive travel adventures across the globe. From the serene
+            fjords of Norway to the vibrant markets of Marrakech, our handpicked guides bring each destination to life
+            with deep knowledge and authentic passion. Journey through the rice terraces of Bali, the ancient ruins of
+            Peru, the castles of Europe, or the colorful streets of Havana. Whether it’s adventure in Patagonia, culture
+            in Kyoto, or leisure on the Amalfi Coast — we turn every trip into a story worth telling.</p>
+        <div class="cards">
+            <div class="trav-cards">
+                <h4>Safety and Security</h4>
+                <p>Your well-being is at the heart of everything we do. We collaborate only with trusted global partners
+                    and certified local guides who ensure your safety throughout your journey. Our planning, logistics,
+                    and on-ground teams are built to give you complete peace of mind — wherever in the world you choose
+                    to go.</p>
+            </div>
+            <div class="trav-cards">
+                <h4>Value-Added Adventures</h4>
+                <p>Travel the world, your way. No fixed groups or rigid itineraries — we tailor every journey to match
+                    your personal travel goals, budget, and pace. Whether you're a solo traveler, couple, or family, we
+                    make it easy to experience luxury, comfort, or cultural depth — without compromising on value.</p>
+            </div>
+            <div class="trav-cards">
+                <h4>24/7 Global Support</h4>
+                <p>The world never sleeps — and neither do we. Our dedicated travel support team is available 24/7 to
+                    assist with anything from flight delays to itinerary adjustments. With WanderWorld, you’re never
+                    truly on your own. Wherever you are, we’re just a call away.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center">
+        <div>
+            <h2>Reasons to Explore the World with WanderWorld</h2>
+            <p style="color: grey;">Endless Destinations, Unique Cultures & Natural Wonders</p>
+        </div>
+        <div style="display: flex; align-items: center;" class="content-wrapper">
+            <div style="flex: 1;">
+                <img src="https://static.vecteezy.com/system/resources/previews/020/833/849/non_2x/world-map-with-country-names-free-vector.jpg"
+                    alt="Travel Image" style="width: 100%" ; />
+            </div>
+            <div style="flex: 1; padding-right: 5px;" class="text-content">
+                <p style="text-align: justify; line-height: 1.6; color: grey;">
+                    The world is a vast tapestry of awe-inspiring landscapes, ancient heritage, and unforgettable
+                    journeys. From snow-dusted peaks to sun-kissed coastlines, every region offers a unique rhythm,
+                    flavor, and adventure.</br></br>
+
+                    Climb the majestic peaks of the Andes or the Himalayas. Witness the surreal beauty of the Northern
+                    Lights in Iceland, or lose yourself in the colorful chaos of India’s festivals. Wander through the
+                    historic streets of Rome, explore the souks of Morocco, or cruise through the emerald waters of Ha
+                    Long Bay.</br></br>
+
+                    Beyond nature and history, find serenity on the tropical beaches of Bora Bora, the Maldives, or the
+                    Caribbean. Whether you're chasing adrenaline, tranquility, or inspiration — the world offers
+                    experiences that awaken the soul and broaden your horizons.</br>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer container-fluid" style="padding: 20px;">
+        <div class="row row-cols-1 row-cols-md-4">
+
+            <div class="col">
+                <h5>Useful Information</h5>
+                <ul>
+                    <li><a href="#">Request a Quote</a></li>
+                    <li><a href="#">Best time to visit world</a></li>
+                    <li><a href="#">Health Issues and Rescue</a></li>
+                    <li><a href="#">Trekking Preparations</a></li>
+                    <li><a href="#">Travel Safety & Precautions</a></li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <h5>Guided Tours</h5>
+                <ul>
+                    <li><a href="#">Accommodation in world</a></li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <h5>Destinations</h5>
+                <ul>
+                    <li><a href="#">Preparations</a></li>
+                    <li><a href="#">Travel Safety & Precautions</a></li>
+                    <li><a href="#">Health Issues and Rescue</a></li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <h5>Pay Safely With Us</h5>
+                <p>The payment is encrypted and transmitted securely with an SSL protocol.</p>
+                <div class="payment-icons mb-2">
+                    <img src="https://img.icons8.com/color/48/000000/paypal.png" alt="PayPal">
+                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+                    <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" alt="Mastercard">
+                    <img src="https://img.icons8.com/color/48/000000/amex.png" alt="Amex">
+                </div>
+                <img src="https://mlzwxdma41xx.i.optimole.com/w:300/h:60/q:mauto/f:best/https://privateexplorers.com/wp-content/uploads/2023/07/DPO.png"
+                    alt="DPO Logo" class="dpo-logo">
+            </div>
+
+        </div>
+
+        <div class="row footer-bottom" style="padding: 20px; font-size: 1rem;">
+            <div class="col-md-6">
+                <p>Copyright © 2025 Private Explorers. All Rights Reserved.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navItems = document.getElementById('navItems');
+
+        menuToggle.addEventListener('click', () => {
+            navItems.classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>

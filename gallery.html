@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('https://st.depositphotos.com/1500858/1942/i/450/depositphotos_19429281-stock-photo-travel-the-world-concept.jpg') no-repeat center center/cover;
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        .card-parent {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 60px;
+            max-width: 1600px;
+            margin: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            color: #ffffff;
+            font-size: 1.2rem;
+        }
+
+        .card a {
+            text-decoration: none;
+        }
+
+        .card a h3 {
+            color: black;
+            background-color: rgb(212, 222, 248);
+        }
+
+        .card-parent {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            width: 250px;
+            height: 160px;
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card-front img {   
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-back {
+            background-color: #fa8585;
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card-parent">
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://media.istockphoto.com/id/1145422105/photo/eiffel-tower-aerial-view-paris.jpg?s=612x612&w=0&k=20&c=sFn6FwTJR0TpX3rP_W4VHrbkTB__6l5kr-lkkqdYrtE="
+                        alt="">
+                </div>
+                <div class="card-back">
+                    <h3>Eiffel Tower</h3>
+                    <p>Paris, France</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://static.toiimg.com/thumb/msid-53891769,width-748,height-499,resizemode=4,imgsize-184383/The-Colosseum.jpg"
+                        alt="">
+                </div>
+                <div class="card-back">
+                    <h3>Colosseum</h3>
+                    <p>Rome, Italy</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://tourismmedia.italia.it/is/image/mitur/20220420142136-il-duomo-di-milano-lombardia-shutterstock-1714109758-1?wid=850&hei=500&fit=constrain,1&fmt=webp"
+                        alt="">
+                </div>
+                <div class="card-back">
+                    <h3>Piazza del Duomo Milan</h3>
+                    <p>Rome, Italy</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://www.planetware.com/wpimages/2020/01/india-in-pictures-beautiful-places-to-photograph-taj-mahal.jpg"
+                        alt="">
+                </div>
+                <div class="card-back">
+                    <h3>Taj Mahal</h3>
+                    <p>Delhi, India</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://media.tacdn.com/media/attractions-splice-spp-674x446/0e/b7/22/da.jpg"
+                        alt="">
+                </div>
+                <div class="card-back">
+                    <h3>Interlaken</h3>
+                    <p>Switzerland</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://silversea-discover.imgix.net/2020/08/shutterstock_291252509.jpg?auto=compress%2Cformat&ixlib=php-3.3.1"
+                        alt="">
+                </div>
+                <div class="card-back">
+                    <h3>Istanbul</h3>
+                    <p>Turkey</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://res.cloudinary.com/gofjords-com/images/w_2560,h_1440,c_scale/f_auto,q_auto/v1709151903/Destinations/Lofoten/northern-lights-lofoten-hamnoy-norway-2/northern-lights-lofoten-hamnoy-norway-2.jpg?_i=AA"
+                        alt="">
+                </div>
+                <div class="card-back">
+                    <h3>Norway</h3>
+                    <p>Europe</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1UJPGkRSUV4R6JU1Y40bCh02Vy24BN4Dr9g&s"
+                        alt="">
+                </div>
+                <div class="card-back">
+                    <h3>Burj Khalifa</h3>
+                    <p>Dubai</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQihQXfHYTTJtLqfs5C1Rvk3kuc-S8YA_FBmA&s"
+                        alt="">
+                </div>
+                <div class="card-back">
+                    <h3>London</h3>
+                    <p>England</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://www.holidify.com/images/bgImages/BENTOTA.jpg"
+                        alt="">
+                </div>
+                <div class="card-back">
+                    <h3>Bentota</h3>
+                    <p>Sri Lanka</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://media.digitalnomads.world/wp-content/uploads/2021/02/20120634/seoul-digital-nomads-1024x654.jpg"
+                        alt="">
+                </div>
+                <div class="card-back">
+                    <h3>Seoul</h3>
+                    <p>South Korea</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://plus.unsplash.com/premium_photo-1661914240950-b0124f20a5c1?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dG9reW98ZW58MHx8MHx8fDA%3D"
+                        alt="">
+                </div>
+                <div class="card-back">
+                    <h3>Tokyo</h3>
+                    <p>Japan</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
